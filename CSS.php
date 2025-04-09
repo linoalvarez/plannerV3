@@ -2,6 +2,9 @@
 
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap');
 
+form {
+    z-index: 99;
+}
 
 html {
     box-sizing: border-box;
@@ -74,8 +77,15 @@ header {
     padding: 1rem 1rem 0rem ;
 }
 
+.student-info h1,
 .student-info h2{
+    opacity: .8;
+}
+
+.student-info h2{
+    font-size: 1.2rem;
     margin-bottom: 0;
+
 }
 
 .student-info h3{
@@ -170,7 +180,7 @@ main {
 .start-time {
     font-size: .65rem;
     font-family: monospace;
-    opacity: .25;
+    opacity: .6;
 }
 
 .block-name {
@@ -196,7 +206,8 @@ main {
 }
 
 .room-number {
-    font-weight: bold;
+    /* font-weight: bold; */
+    color: #aaa;
 }
 
 footer {
@@ -211,10 +222,10 @@ footer {
     padding-top: .5rem;
     font-family: monospace;
     position: absolute;
-    opacity: .125;
+    opacity: .25;
     width: max-content;
     position: absolute;
-    bottom: 20.7rem;
+    bottom: 20rem;
 }
 
 main .period:nth-of-type(5):before {
@@ -394,6 +405,25 @@ table td:first-of-type {
     display: grid;
     grid-template-columns: 1fr 1fr;
     font-family: 'PT Sans Narrow';
+}
+
+img:nth-of-type(1),
+img:nth-of-type(2) {
+    width: 4rem;
+    position: absolute;
+    opacity: .2;
+    /* border: 1px solid #ddd; */
+}
+
+img:nth-of-type(1) {left: 1rem;}
+img:nth-of-type(2) {right: 1rem;}
+
+.back-logo img {
+    width: 50%;
+    position: absolute;
+    top: 80%;
+    left: 25%;
+    border: 1px solid #ddd;
 }
 
 @media print {

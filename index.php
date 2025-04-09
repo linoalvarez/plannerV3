@@ -1,20 +1,34 @@
+
 <?php
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);
     header("Pragma: no-cache");
 ?>
 
+<?php include('CSS.php'); ?>
+
+<?php include('CSS-extra.php'); ?>
+
 <?php
-    $start_date = strtotime("2024-08-27");  // Updated start date
-    $end_date = strtotime("2025-06-12");    // Updated end date
+    $start_date = strtotime("2024-08-27");  // Start date
+    $end_date = strtotime("2025-06-12");    // End date
 
 include('data-holidays-specialdays.php');
+
 
 // Read data from the CSV file and store in an associative array
 $data_file = fopen("data.csv", "r");
 $class_data = [];
 $students = [];
+$header_skipped = false;
+
 while (($row = fgetcsv($data_file)) !== FALSE) {
+    // Skip the header row
+    if (!$header_skipped) {
+        $header_skipped = true;
+        continue;
+    }
+
     $block = $row[0];           // Block (A1, B2, etc.)
     $class_name = $row[1];      // Class name (Math, Physics, etc.)
     $teacher = $row[2];         // Teacher name (Mr. SoAndSo, Mrs. ThisAndThat)
@@ -42,10 +56,18 @@ $student_name = $students[$selected_student] ?? '';
 $student_email = $selected_student;
 $class_data_for_student = $class_data[$selected_student] ?? [];
 
+// Sort students by last name
+// Split the student name into first and last name, then sort
+uasort($students, function($a, $b) {
+    // Assume names are "First Last"
+    $last_name_a = explode(" ", $a)[1] ?? $a; // Get last name, if possible
+    $last_name_b = explode(" ", $b)[1] ?? $b; // Get last name, if possible
+
+    return strcmp($last_name_a, $last_name_b);
+});
+
 $amsa_day = 1;
 $school_day_count = 0;
-
-
 ?>
 
 <form class="no-print" method="GET">
@@ -53,9 +75,12 @@ $school_day_count = 0;
     <select name="student" id="student" onchange="this.form.submit()">
         <option value="">-- Select Student --</option>
         <?php foreach ($students as $email => $name): ?>
-            <option value="<?= htmlspecialchars($email) ?>" <?= $selected_student == $email ? 'selected' : '' ?>>
-                <?= htmlspecialchars($name) ?>
-            </option>
+            <!-- Skip the header value, which could be "student_name" -->
+            <?php if ($name !== 'student_name'): ?>
+                <option value="<?= htmlspecialchars($email) ?>" <?= $selected_student == $email ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($name) ?>
+                </option>
+            <?php endif; ?>
         <?php endforeach; ?>
     </select>
 </form>
@@ -63,6 +88,8 @@ $school_day_count = 0;
 <?php if ($student_name): ?>
     <div class="wrapper">
         <div class="student-info">
+            <img src="AMSA_RGB_Icon_Blk.jpg">
+            <img src="AMSA_RGB_Icon_Blk.jpg">
             <h1>AMSA <?= date("Y", $start_date) ?>/<?= date("Y", $end_date) ?></h1>
             <h2><?= htmlspecialchars($student_name) ?></h2>
             <h3><?= htmlspecialchars($student_email) ?></h3>
@@ -197,12 +224,14 @@ foreach ($categories as $category) {
             $start_date = strtotime("+1 day", $start_date);
         }
         ?>
+
 <div class="school-day">
-<?php include('calendar4planner.php'); ?>
+    <?php include('calendar4planner.php'); ?>
 </div>
+
+<div class="school-day back-logo">
+    <img src="AMSA_RGB_Logo_Blk_Academy_and_Values.jpg">
+</div>
+
     </div>
 <?php endif; ?>
-
-<?php include('CSS.php'); ?>
-
-<?php include('CSS-extra.php'); ?>
