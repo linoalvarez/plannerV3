@@ -88,8 +88,8 @@ $school_day_count = 0;
 <?php if ($student_name): ?>
     <div class="wrapper">
         <div class="student-info">
-            <img src="AMSA_RGB_Icon_Blk.jpg">
-            <img src="AMSA_RGB_Icon_Blk.jpg">
+            <img src="img/AMSA_RGB_Icon_Blk.jpg">
+            <img src="img/AMSA_RGB_Icon_Blk.jpg">
             <h1>AMSA <?= date("Y", $start_date) ?>/<?= date("Y", $end_date) ?></h1>
             <h2><?= htmlspecialchars($student_name) ?></h2>
             <h3><?= htmlspecialchars($student_email) ?></h3>
@@ -230,7 +230,7 @@ foreach ($categories as $category) {
 </div>
 
 <div class="school-day back-logo">
-    <img src="AMSA_RGB_Logo_Blk_Academy_and_Values.jpg">
+    <img src="img/AMSA_RGB_Logo_Blk_Academy_and_Values.jpg">
 </div>
 
     </div>
