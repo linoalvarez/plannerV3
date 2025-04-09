@@ -1,5 +1,5 @@
 <head>
-    <meta http-equiv="refresh" content="10">
+    <meta http-equiv="refresh" content="5">
 </head>
 
 <?php
@@ -73,7 +73,7 @@ foreach ($base_periods as $period => $times) {
 
 // If no period found, then school is not in session
 if ($current_period === null) {
-    echo "School is not in session right now.";
+    echo "School  not in session. Go play!";
     exit;
 }
 
