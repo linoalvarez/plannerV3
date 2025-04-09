@@ -5,19 +5,19 @@
     header("Pragma: no-cache");
 ?>
 
-<?php include('CSS.php'); ?>
+<?php include('css/CSS.php'); ?>
 
-<?php include('CSS-extra.php'); ?>
+<?php include('css/CSS-extra.php'); ?>
 
 <?php
     $start_date = strtotime("2024-08-27");  // Start date
     $end_date = strtotime("2025-06-12");    // End date
 
-include('data-holidays-specialdays.php');
+include('data/data-holidays-specialdays.php');
 
 
 // Read data from the CSV file and store in an associative array
-$data_file = fopen("data.csv", "r");
+$data_file = fopen("data/data.csv", "r");
 $class_data = [];
 $students = [];
 $header_skipped = false;
