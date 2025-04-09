@@ -4,6 +4,19 @@
 
 form {
     z-index: 99;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+}
+
+form label {
+    display: block;
+    font-size: .8rem;
+}
+
+form select {
+    padding: 0.1rem;
+    font-family: georgia;
 }
 
 html {
@@ -11,6 +24,10 @@ html {
     /* font-size: 20px; */
     font-family: georgia;
     color: #333;
+}
+
+body {
+    position: relative;
 }
 
 * {

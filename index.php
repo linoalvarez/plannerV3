@@ -71,7 +71,7 @@ $school_day_count = 0;
 ?>
 
 <form class="no-print" method="GET">
-    <label for="student">Select Student:</label>
+    <label for="student">Student:</label>
     <select name="student" id="student" onchange="this.form.submit()">
         <option value="">-- Select Student --</option>
         <?php foreach ($students as $email => $name): ?>
