@@ -193,7 +193,7 @@ while ($current_timestamp <= $today_timestamp) {
 $rotation_day = (($school_day_count - 1) % 8) + 1;
 $days_left = 180 - $school_day_count;
 echo "<div class='school-day-count'>";
-echo "$school_day_count days down / $days_left days to go";
+echo "$school_day_count days down / $days_left to go";
 echo "</div>";
 echo "<div class='amsa-day'>Today is a Day $rotation_day</div>";
 
