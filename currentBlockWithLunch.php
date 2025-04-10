@@ -16,6 +16,11 @@
         color: #666;
         font-size: .65rem;
     }
+
+    .now {
+        font-weight: 900;
+        margin-bottom: 0.5rem;
+    }
 </style>
 
 <?php
@@ -30,7 +35,7 @@ if (isset($_GET['clear_lunch'])) {
 }
 ?>
 <head>
-    <meta http-equiv="refresh" content="55">
+    <meta http-equiv="refresh" content="5">
     <title>Current Block with Lunch</title>
 </head>
 <body>
@@ -45,9 +50,9 @@ $current_date = date("Y-m-d");
 $current_time = date("H:i:s");
 
 // Debug output: current date and time
-echo "<div>";
-echo "Current Time: $current_time / ";
-echo "Current Date: $current_date<br>";
+echo "<div class='now'>";
+echo "Date: $current_date / ";
+echo "Time: $current_time";
 echo "</div>";
 
 // Define lunch options array
@@ -124,15 +129,26 @@ $next_period = null;
 $current_block = null;
 $next_block = null;
 
-// Find the current period based on the current time
-foreach ($base_periods as $period => $times) {
-    if ($current_time >= $times['start'] && $current_time < $times['end']) {
-        $current_period = $period;
-        $current_block = $rotation[$rotation_day][$period - 1];
+// Special handling for Period 5 (includes lunch)
+$is_in_lunch_window = false;
+$lunch_start = $lunch_options[$lunch_choice]['start'];
+$lunch_end = $lunch_options[$lunch_choice]['end'];
+
+if ($current_time >= '11:11:00' && $current_time < '12:18:00') {
+    $current_period = 5;
+    $current_block = $rotation[$rotation_day][4];
+    $is_in_lunch_window = true;
+} else {
+    // Normal period detection
+    foreach ($base_periods as $period => $times) {
+        if ($current_time >= $times['start'] && $current_time < $times['end']) {
+            $current_period = $period;
+            $current_block = $rotation[$rotation_day][$period - 1];
+        }
     }
 }
 
-// Determine the next period based on the current period
+// Determine the next period
 if ($current_period !== null && $current_period < 8) {
     $next_period = $current_period + 1;
     $next_block = $rotation[$rotation_day][$next_period - 1];
@@ -140,21 +156,24 @@ if ($current_period !== null && $current_period < 8) {
 
 // --- Display current or next period ---
 if ($current_period !== null) {
-    echo "<div class='current-block-period'>
-        Currently in Period $current_period 
-        <br>
-        <strong>  
-        $current_block ({$base_periods[$current_period]['start']} – {$base_periods[$current_period]['end']})
-        </strong>
-    </div>";
+    echo "<div class='current-block-period'>";
+    echo "Currently in Period $current_period<br>";
+    echo "<strong>$current_block ({$base_periods[$current_period]['start']} – {$base_periods[$current_period]['end']})</strong>";
+
+    // Add lunch info if currently in Period 5
+    if ($current_period == 5) {
+        echo "<br><span class='lunch-time'>{$lunch_options[$lunch_choice]['label']} ({$lunch_start}–{$lunch_end})</span>";
+    }
+
+    echo "</div>";
 } else {
-    // Check if we're between periods
+    // Between periods logic
     foreach ($base_periods as $p => $times) {
         if (isset($base_periods[$p + 1])) {
             $gap_start = $times['end'];
             $gap_end = $base_periods[$p + 1]['start'];
             if ($current_time >= $gap_start && $current_time < $gap_end) {
-                $next_block = $rotation[$rotation_day][$p]; // $p is 1-based, matches the current period number
+                $next_block = $rotation[$rotation_day][$p]; // p is 1-based
                 echo "<div class='next-block-period'>
                     Between periods<br>
                     <strong>Next: Period " . ($p + 1) . " – $next_block ({$gap_end} – {$base_periods[$p + 1]['end']})</strong>
@@ -164,11 +183,11 @@ if ($current_period !== null) {
         }
     }
 
-    // If it's not during a school day timeframe at all
     if ($current_time < $base_periods[1]['start'] || $current_time >= $base_periods[8]['end']) {
         echo "No school right now. Go enjoy your day!<br>";
     }
 }
+
 
 // --- Display today's schedule ---
 echo "<h2 class='classes-for-today'>Classes for Today (Day <strong>$rotation_day</strong>):</h2>";
