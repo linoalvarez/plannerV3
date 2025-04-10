@@ -41,13 +41,11 @@
         font-size: .8rem;
         font-family: 'Roboto Mono';
         letter-spacing: -1px;
-        list-style: decimal ; 
+        list-style: decimal;
     }
 
     li {
-        /* margin: 0.2rem 0; */
         padding: 0.2rem 1.5rem 0.2rem 0.5rem;
-        /* width: max-content; */
     }
     
     li strong {
@@ -73,7 +71,6 @@
     .red {
         color: red;
     }
-
 </style>
 
 <?php
@@ -97,7 +94,19 @@ if (isset($_GET['clear_lunch'])) {
 date_default_timezone_set('America/New_York');
 
 include('data/data-holidays-specialdays.php');
-include('data/data-holidays-specialdays.php');
+
+// Load the LAS CSV for class names (assuming CSV columns: block,class_name,...)
+$las_schedule = [];
+if (($handle = fopen("data/data-LAS.csv", "r")) !== FALSE) {
+    // Read header row
+    fgetcsv($handle);
+    while (($data = fgetcsv($handle)) !== FALSE) {
+        $block = trim($data[0]);       // Trim block name to ensure consistency
+        $class_name = trim($data[1]);    // Trim class name
+        $las_schedule[$block] = $class_name;
+    }
+    fclose($handle);
+}
 
 // Get current date and time
 $current_date = date("Y-m-d");
@@ -201,7 +210,7 @@ if ($current_time >= '11:11:00' && $current_time < '12:18:00') {
         if ($current_time >= $times['start'] && $current_time < $times['end']) {
             $current_period = $period;
             $current_block = $rotation[$rotation_day][$period - 1];
-            break; // stop at first matching period
+            break; // Stop at first matching period.
         }
     }
 }
@@ -241,7 +250,7 @@ if ($current_period !== null) {
         echo "<br><span class='lunch-time'>{$lunch_options[$lunch_choice]['label']} ({$lunch_start}–{$lunch_end})</span>";
     }
     echo "</div>";
-    echo "</div>";
+    echo "</div>"; // Close info div
 } else {
     // Between periods logic
     foreach ($base_periods as $p => $times) {
@@ -264,19 +273,24 @@ if ($current_period !== null) {
 }
 
 // --- Display today's schedule ---
+echo "<div class='schedule-wrapper'>";
 echo "<h2 class='classes-for-today'>Classes for Today (Day <strong>$rotation_day</strong>):</h2>";
 echo "<ul class='todays-rotation'>";
 for ($period = 1; $period <= count($base_periods); $period++) {
     if ($period == 5) {
-        // For period 5, force start time to "11:11" and include lunch info.
+        // For Period 5, force start time to "11:11" and include lunch info.
         $times = $base_periods[$period];
         $times['start'] = "11:11";
         $block_name = $rotation[$rotation_day][4];
         $lunch = $lunch_options[$lunch_choice];
-        $block = "$block_name <br> <span class='lunch-time'>{$lunch['label']} ({$lunch['start']}–{$lunch['end']})</span>";
+        // Look up the class name from CSV with trimming
+        $class_name = isset($las_schedule[trim($block_name)]) ? $las_schedule[trim($block_name)] : 'N/A';
+        $block = "$block_name - $class_name <br> <span class='lunch-time'>{$lunch['label']} ({$lunch['start']}–{$lunch['end']})</span>";
     } else {
-        $block = $rotation[$rotation_day][$period - 1];
+        $block_name = $rotation[$rotation_day][$period - 1];
         $times = $base_periods[$period];
+        $class_name = isset($las_schedule[trim($block_name)]) ? $las_schedule[trim($block_name)] : 'N/A';
+        $block = "$block_name - $class_name";
     }
     $display = $times['start'] . " - " . $times['end'] . " - " . $block;
     if ($period == $current_period) {
@@ -286,6 +300,7 @@ for ($period = 1; $period <= count($base_periods); $period++) {
     }
 }
 echo "</ul>";
+echo "</div>";
 
 ob_end_flush();
 ?>

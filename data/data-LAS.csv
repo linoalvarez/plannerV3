@@ -1,0 +1,17 @@
+block,class_name,teacher_name,room_number,student_email,student_name
+A1,CS8,211,26,lalvarez@amsacs.org,Lino Alvarez
+A2,CS8,211,26,lalvarez@amsacs.org,Lino Alvarez
+B1,,,,lalvarez@amsacs.org,Lino Alvarez
+B2,CS8,211,22,lalvarez@amsacs.org,Lino Alvarez
+C1,WD1,211,26,lalvarez@amsacs.org,Lino Alvarez
+C2,CS8,211,23,lalvarez@amsacs.org,Lino Alvarez
+D1,,,,lalvarez@amsacs.org,Lino Alvarez
+D2,,,,lalvarez@amsacs.org,Lino Alvarez
+E1,CS8,211,11,lalvarez@amsacs.org,Lino Alvarez
+E2,CS8,211,22,lalvarez@amsacs.org,Lino Alvarez
+F1,CS6,211,25,lalvarez@amsacs.org,Lino Alvarez
+F2,CS6,211,25,lalvarez@amsacs.org,Lino Alvarez
+G1,,,,lalvarez@amsacs.org,Lino Alvarez
+G2,CS8,211,14,lalvarez@amsacs.org,Lino Alvarez
+H1,DS,211,,lalvarez@amsacs.org,Lino Alvarez
+H2,DS,211,,lalvarez@amsacs.org,Lino Alvarez
