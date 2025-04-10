@@ -84,6 +84,29 @@
     .red {
         color: red;
     }
+
+    label[for] {
+        display: block;
+        padding: 1rem  .5rem ;
+        transition: .2s all ease-in-out;
+    }
+
+    label[for]:hover {
+        color: darkblue;
+        background-color: darkorange;
+    }
+
+    input[type="radio"]:checked + label {
+        color: red;
+        background-color: darkblue;
+        color: darkorange;
+        /* font-weight: bold; */
+    }
+
+    input[type="radio"] {
+        display: none;
+    }
+
 </style>
 
 <?php
@@ -147,12 +170,12 @@ if (isset($_GET['lunch_choice']) && isset($lunch_options[$_GET['lunch_choice']])
 // If there's no lunch choice stored in a cookie, show the selection form with clickable labels.
 if (!isset($_COOKIE['lunch_choice']) || !isset($lunch_options[$_COOKIE['lunch_choice']])) {
     echo '<form method="get">';
-    echo '<label>Select your lunch for today:</label><br><br>';
+    echo '<label>Select your lunch for today:</label>';
     foreach ($lunch_options as $key => $option) {
         // Create a unique ID for each radio input.
         $input_id = 'lunch_' . $key;
         echo "<input type='radio' id='$input_id' name='lunch_choice' value='$key' required>";
-        echo "<label for='$input_id'>{$option['label']} ({$option['start']} - {$option['end']})</label><br><br>";
+        echo "<label for='$input_id'>{$option['label']} ({$option['start']} - {$option['end']})</label>";
     }
     echo '<input type="submit" value="Submit">';
     echo '</form>';
