@@ -34,11 +34,11 @@
     .info {
         padding: 1rem;
         background-color: #eee;
+        text-align: center;
     }
 
     .info div {
         margin-bottom: 0.5rem;
-        text-align: center;
 
     }
 
@@ -277,7 +277,7 @@ if ($current_period !== null) {
         }
     }
     if ($current_time < $base_periods[1]['start'] || $current_time >= $base_periods[8]['end']) {
-        echo "No school right now. Go enjoy your day!<br>";
+        echo "School not in session. Go play!<br>";
     }
 }
 
