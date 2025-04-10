@@ -1,7 +1,8 @@
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
-    :root {
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+:root {
         font-size: 1.25rem;
         font-family: georgia;
     }
@@ -44,9 +45,15 @@
 
     ul {
         font-size: .8rem;
-        font-family: 'Roboto Mono';
+        font-family: 'Roboto Condensed';
         letter-spacing: -1px;
         list-style: decimal;
+    }
+
+    ul li b {
+        font-family: 'Roboto Mono';
+        font-size: 1.125rem;
+        padding-left: 1rem;
     }
 
     li {
