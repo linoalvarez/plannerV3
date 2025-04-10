@@ -16,7 +16,7 @@ if (isset($_GET['clear_lunch'])) {
 }
 ?>
 <head>
-    <meta http-equiv="refresh" content="5">
+    <meta http-equiv="refresh" content="55">
     <title>Current Block with Lunch</title>
 </head>
 
@@ -30,8 +30,10 @@ $current_date = date("Y-m-d");
 $current_time = date("H:i:s");
 
 // Debug output: current date and time
+echo "<div>";
 echo "Current Time: $current_time / ";
 echo "Current Date: $current_date<br>";
+echo "</div>";
 
 // Define lunch options array
 $lunch_options = [
@@ -64,7 +66,7 @@ $lunch_choice = $_COOKIE['lunch_choice'];
 // Display a button to clear the current lunch selection cookie.
 echo '<form method="get" style="margin-bottom: 1em;">';
 echo '<input type="hidden" name="clear_lunch" value="1">';
-echo '<input type="submit" value="Clear Lunch Selection">';
+echo '<input type="submit" value="Select Lunch">';
 echo '</form>';
 
 // Check if today is a holiday (no school)
@@ -96,40 +98,66 @@ while ($current_timestamp <= $today_timestamp) {
 
 $rotation_day = (($school_day_count - 1) % 8) + 1;
 $days_left = 180 - $school_day_count;
-echo "$school_day_count days down / $days_left days to go <br>";
-echo "Today is a Day $rotation_day<br>";
+echo "<div class='school-day-count'>";
+echo "$school_day_count days down / $days_left days to go";
+echo "</div>";
+echo "<div class='amsa-day'>Today is a Day $rotation_day</div>";
 
-// --- Determine the current period ---
+// --- Determine the current and next period ---
 $current_period = null;
+$next_period = null;
+$current_block = null;
+$next_block = null;
+
+// Find the current period based on the current time
 foreach ($base_periods as $period => $times) {
     if ($current_time >= $times['start'] && $current_time < $times['end']) {
         $current_period = $period;
-        break;
+        $current_block = $rotation[$rotation_day][$period - 1];
     }
 }
 
-$current_block = null;
-if ($current_period == 5) {
-    $lunch = $lunch_options[$lunch_choice];
-    if ($current_time >= $lunch['start'] && $current_time < $lunch['end']) {
-        $current_block = $lunch['label'];
-    } else {
-        $current_block = $rotation[$rotation_day][4]; // period 5 uses index 4
-    }
-} elseif ($current_period !== null) {
-    $current_block = $rotation[$rotation_day][$current_period - 1];
+// Determine the next period based on the current period
+if ($current_period !== null && $current_period < 8) {
+    $next_period = $current_period + 1;
+    $next_block = $rotation[$rotation_day][$next_period - 1];
+}
+
+// --- Display current or next period ---
+if ($current_period !== null) {
+    echo "<div class='current-block-period'>
+        Currently in Period $current_period 
+        <br>
+        <strong>  
+        $current_block ({$base_periods[$current_period]['start']} – {$base_periods[$current_period]['end']})
+        </strong>
+    </div>";
 } else {
-    echo "School not in session. Go play!";
-    ob_end_flush();
-    exit;
-}
+    // Check if we're between periods
+    foreach ($base_periods as $p => $times) {
+        if (isset($base_periods[$p + 1])) {
+            $gap_start = $times['end'];
+            $gap_end = $base_periods[$p + 1]['start'];
+            if ($current_time >= $gap_start && $current_time < $gap_end) {
+                $next_block = $rotation[$rotation_day][$p]; // $p is 1-based, matches the current period number
+                echo "<div class='next-block-period'>
+                    Between periods<br>
+                    <strong>Next: Period " . ($p + 1) . " – $next_block ({$gap_end} – {$base_periods[$p + 1]['end']})</strong>
+                </div>";
+                break;
+            }
+        }
+    }
 
-echo "Currently in Period " . $current_period . "<br>";
-echo "Current Block: <strong>" . $current_block . "</strong><br><br>";
+    // If it's not during a school day timeframe at all
+    if ($current_time < $base_periods[1]['start'] || $current_time >= $base_periods[8]['end']) {
+        echo "No school right now. Go enjoy your day!<br>";
+    }
+}
 
 // --- Display today's schedule ---
-echo "Classes for Today (Day $rotation_day):<br>";
-echo "<ul>";
+echo "<div class='classes-for-today'>Classes for Today (Day $rotation_day):</div>";
+echo "<ul class='todays-rotation'>";
 for ($period = 1; $period <= count($base_periods); $period++) {
     if ($period == 5) {
         // For period 5, we force the start time to "11:11", regardless of lunch selection,
@@ -145,12 +173,9 @@ for ($period = 1; $period <= count($base_periods); $period++) {
         $times = $base_periods[$period];
     }
 
-    $display = $times['start'] . "<br>" . $times['end'] . " - " . $block;
+    $display = $times['start'] . " - " . $times['end'] . " - " . $block;
 
-    if (
-        ($period == 5 && (strpos($block, $current_block) !== false)) ||
-        ($block == $current_block)
-    ) {
+    if ($period == $current_period) {
         echo "<li><strong>$display</strong></li>";
     } else {
         echo "<li>$display</li>";
