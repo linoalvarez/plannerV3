@@ -1,5 +1,6 @@
 <head>
     <meta http-equiv="refresh" content="5">
+    <title>Current Block</title>
 </head>
 
 <?php
