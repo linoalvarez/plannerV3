@@ -8,6 +8,9 @@
 
     h2 {
         font-family: Helvetica;
+        font-size: 1.2rem;
+        border-bottom: 2px solid #3333;
+        padding-bottom: .5rem;
     }
 
     .wrapper {
@@ -35,6 +38,8 @@
 
     .info div {
         margin-bottom: 0.5rem;
+        text-align: center;
+
     }
 
     ul {
@@ -62,6 +67,7 @@
     .now {
         font-weight: 900;
         margin-bottom: 0.5rem;
+        text-align: center;
     }
 
     .time-left {
@@ -85,7 +91,7 @@ if (isset($_GET['clear_lunch'])) {
 }
 ?>
 <head>
-    <meta http-equiv="refresh" content="10">
+    <meta http-equiv="refresh" content="1550">
     <title>Current Block with Lunch</title>
 </head>
 <body>
@@ -276,8 +282,9 @@ if ($current_period !== null) {
 }
 
 // --- Display today's schedule ---
-echo "<div class='schedule-wrapper'>";
-echo "<h2 class='classes-for-today'>Classes for Today (Day <strong>$rotation_day</strong>)</h2>";
+echo "</div>";
+echo "<div class='schedule'>";
+echo "<h2 class='classes-for-today'>Today Schedule (Day <strong>$rotation_day</strong>)</h2>";
 echo "<ul class='todays-rotation'>";
 for ($period = 1; $period <= count($base_periods); $period++) {
     if ($period == 5) {
