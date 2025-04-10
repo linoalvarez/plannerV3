@@ -1,15 +1,59 @@
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
     :root {
         font-size: 1.25rem;
         font-family: georgia;
     }
 
+    h2 {
+        font-family: Helvetica;
+    }
+
+    .wrapper {
+        width: max-content;
+        padding: 3rem 3rem 3rem;
+        border: 1px solid #3333;
+        border-radius: 5px;
+        margin: 3rem auto 0rem;
+        box-shadow: 0 0 10px -1px #3339;
+        position: relative;
+    }
+
+    input[type="submit"] {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        padding: .5rem 1rem;
+        border-radius: 5px;
+    }
+
+    .info {
+        padding: 1rem;
+        background-color: #eee;
+    }
+
+    .info div {
+        margin-bottom: 0.5rem;
+    }
+
     ul {
         font-size: .8rem;
+        font-family: 'Roboto Mono';
+        letter-spacing: -1px;
+        list-style: decimal ; 
     }
 
     li {
-        margin-bottom: 0.2rem;
+        /* margin: 0.2rem 0; */
+        padding: 0.2rem 1.5rem 0.2rem 0.5rem;
+        /* width: max-content; */
+    }
+    
+    li strong {
+        padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+        background-color: darkblue;
+        color: darkorange;
     }
 
     span.lunch-time {
@@ -21,6 +65,15 @@
         font-weight: 900;
         margin-bottom: 0.5rem;
     }
+
+    .time-left {
+        font-style: italic;
+    }
+
+    .red {
+        color: red;
+    }
+
 </style>
 
 <?php
@@ -35,7 +88,7 @@ if (isset($_GET['clear_lunch'])) {
 }
 ?>
 <head>
-    <meta http-equiv="refresh" content="5">
+    <meta http-equiv="refresh" content="10">
     <title>Current Block with Lunch</title>
 </head>
 <body>
@@ -43,6 +96,7 @@ if (isset($_GET['clear_lunch'])) {
 <?php
 date_default_timezone_set('America/New_York');
 
+include('data/data-holidays-specialdays.php');
 include('data/data-holidays-specialdays.php');
 
 // Get current date and time
@@ -89,6 +143,8 @@ echo '<input type="hidden" name="clear_lunch" value="1">';
 echo '<input type="submit" value="Select Lunch">';
 echo '</form>';
 
+echo '<div class="info">';
+
 // Check if today is a holiday (no school)
 if (array_key_exists($current_date, $holidays)) {
     echo "School is not in session today due to: " . $holidays[$current_date][0];
@@ -134,16 +190,18 @@ $is_in_lunch_window = false;
 $lunch_start = $lunch_options[$lunch_choice]['start'];
 $lunch_end = $lunch_options[$lunch_choice]['end'];
 
+// If current time is between 11:11 and 12:18, we consider it Period 5.
 if ($current_time >= '11:11:00' && $current_time < '12:18:00') {
     $current_period = 5;
     $current_block = $rotation[$rotation_day][4];
     $is_in_lunch_window = true;
 } else {
-    // Normal period detection
+    // Normal period detection for all periods except 5.
     foreach ($base_periods as $period => $times) {
         if ($current_time >= $times['start'] && $current_time < $times['end']) {
             $current_period = $period;
             $current_block = $rotation[$rotation_day][$period - 1];
+            break; // stop at first matching period
         }
     }
 }
@@ -154,17 +212,35 @@ if ($current_period !== null && $current_period < 8) {
     $next_block = $rotation[$rotation_day][$next_period - 1];
 }
 
-// --- Display current or next period ---
+// --- Display current or next period with time remaining ---
 if ($current_period !== null) {
     echo "<div class='current-block-period'>";
     echo "Currently in Period $current_period<br>";
-    echo "<strong>$current_block ({$base_periods[$current_period]['start']} – {$base_periods[$current_period]['end']})</strong>";
-
-    // Add lunch info if currently in Period 5
+    echo "<strong>$current_block ({$base_periods[$current_period]['start']} – ";
+    // For Period 5, override the end time to 12:18.
+    if ($current_period == 5) {
+        echo "12:18";
+        $period_end_ts = strtotime("12:18:00");
+    } else {
+        echo "{$base_periods[$current_period]['end']})";
+        $period_end_ts = strtotime($base_periods[$current_period]['end']);
+    }
+    echo "</strong>";
+    
+    // Calculate time remaining in current period.
+    $now_ts = strtotime($current_time);
+    $diff = $period_end_ts - $now_ts;
+    if ($diff > 0) {
+        $minutes = floor($diff / 60);
+        $seconds = $diff % 60;
+        echo "<div class='time-left'>Time remaining: <strong class='red'>{$minutes}m {$seconds}s</strong></div>";
+    }
+    
+    // Add lunch info if in Period 5
     if ($current_period == 5) {
         echo "<br><span class='lunch-time'>{$lunch_options[$lunch_choice]['label']} ({$lunch_start}–{$lunch_end})</span>";
     }
-
+    echo "</div>";
     echo "</div>";
 } else {
     // Between periods logic
@@ -182,32 +258,27 @@ if ($current_period !== null) {
             }
         }
     }
-
     if ($current_time < $base_periods[1]['start'] || $current_time >= $base_periods[8]['end']) {
         echo "No school right now. Go enjoy your day!<br>";
     }
 }
-
 
 // --- Display today's schedule ---
 echo "<h2 class='classes-for-today'>Classes for Today (Day <strong>$rotation_day</strong>):</h2>";
 echo "<ul class='todays-rotation'>";
 for ($period = 1; $period <= count($base_periods); $period++) {
     if ($period == 5) {
-        // For period 5, we force the start time to "11:11", regardless of lunch selection, because the overall block always starts at 11:11.
+        // For period 5, force start time to "11:11" and include lunch info.
         $times = $base_periods[$period];
         $times['start'] = "11:11";
         $block_name = $rotation[$rotation_day][4];
         $lunch = $lunch_options[$lunch_choice];
-        // Output both the 5th period block name and the lunch info.
         $block = "$block_name <br> <span class='lunch-time'>{$lunch['label']} ({$lunch['start']}–{$lunch['end']})</span>";
     } else {
         $block = $rotation[$rotation_day][$period - 1];
         $times = $base_periods[$period];
     }
-
     $display = $times['start'] . " - " . $times['end'] . " - " . $block;
-
     if ($period == $current_period) {
         echo "<li><strong>$display</strong></li>";
     } else {
@@ -216,6 +287,7 @@ for ($period = 1; $period <= count($base_periods); $period++) {
 }
 echo "</ul>";
 
-ob_end_flush(); ?>
-
-</div>
+ob_end_flush();
+?>
+    </div>
+</body>
