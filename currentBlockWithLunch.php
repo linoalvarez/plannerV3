@@ -131,12 +131,15 @@ if (isset($_GET['lunch_choice']) && isset($lunch_options[$_GET['lunch_choice']])
     $_COOKIE['lunch_choice'] = $_GET['lunch_choice'];
 }
 
-// If there's no lunch choice stored in a cookie, show the selection form.
+// If there's no lunch choice stored in a cookie, show the selection form with clickable labels.
 if (!isset($_COOKIE['lunch_choice']) || !isset($lunch_options[$_COOKIE['lunch_choice']])) {
     echo '<form method="get">';
-    echo '<label>Select your lunch for today:</label><br>';
+    echo '<label>Select your lunch for today:</label><br><br>';
     foreach ($lunch_options as $key => $option) {
-        echo "<input type='radio' name='lunch_choice' value='$key' required> {$option['label']} ({$option['start']} - {$option['end']})<br>";
+        // Create a unique ID for each radio input.
+        $input_id = 'lunch_' . $key;
+        echo "<input type='radio' id='$input_id' name='lunch_choice' value='$key' required>";
+        echo "<label for='$input_id'>{$option['label']} ({$option['start']} - {$option['end']})</label><br><br>";
     }
     echo '<input type="submit" value="Submit">';
     echo '</form>';
@@ -274,7 +277,7 @@ if ($current_period !== null) {
 
 // --- Display today's schedule ---
 echo "<div class='schedule-wrapper'>";
-echo "<h2 class='classes-for-today'>Classes for Today (Day <strong>$rotation_day</strong>):</h2>";
+echo "<h2 class='classes-for-today'>Classes for Today (Day <strong>$rotation_day</strong>)</h2>";
 echo "<ul class='todays-rotation'>";
 for ($period = 1; $period <= count($base_periods); $period++) {
     if ($period == 5) {
@@ -283,16 +286,16 @@ for ($period = 1; $period <= count($base_periods); $period++) {
         $times['start'] = "11:11";
         $block_name = $rotation[$rotation_day][4];
         $lunch = $lunch_options[$lunch_choice];
-        // Look up the class name from CSV with trimming
+        // Look up class name using trimmed block name.
         $class_name = isset($las_schedule[trim($block_name)]) ? $las_schedule[trim($block_name)] : 'N/A';
-        $block = "$block_name - $class_name <br> <span class='lunch-time'>{$lunch['label']} ({$lunch['start']}–{$lunch['end']})</span>";
+        $block = "$block_name  $class_name <br> <span class='lunch-time'>{$lunch['label']} ({$lunch['start']}–{$lunch['end']})</span>";
     } else {
         $block_name = $rotation[$rotation_day][$period - 1];
         $times = $base_periods[$period];
         $class_name = isset($las_schedule[trim($block_name)]) ? $las_schedule[trim($block_name)] : 'N/A';
-        $block = "$block_name - $class_name";
+        $block = "$block_name  $class_name";
     }
-    $display = $times['start'] . " - " . $times['end'] . " - " . $block;
+    $display = $times['start'] . " - " . $times['end'] . " <b>" . $block . "</b>";
     if ($period == $current_period) {
         echo "<li><strong>$display</strong></li>";
     } else {
