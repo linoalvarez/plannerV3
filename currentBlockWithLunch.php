@@ -1,6 +1,20 @@
 <style>
     :root {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
+        font-family: georgia;
+    }
+
+    ul {
+        font-size: .8rem;
+    }
+
+    li {
+        margin-bottom: 0.2rem;
+    }
+
+    span.lunch-time {
+        color: #666;
+        font-size: .65rem;
     }
 </style>
 
@@ -19,7 +33,8 @@ if (isset($_GET['clear_lunch'])) {
     <meta http-equiv="refresh" content="55">
     <title>Current Block with Lunch</title>
 </head>
-
+<body>
+    <div class="wrapper">
 <?php
 date_default_timezone_set('America/New_York');
 
@@ -156,18 +171,17 @@ if ($current_period !== null) {
 }
 
 // --- Display today's schedule ---
-echo "<div class='classes-for-today'>Classes for Today (Day $rotation_day):</div>";
+echo "<h2 class='classes-for-today'>Classes for Today (Day <strong>$rotation_day</strong>):</h2>";
 echo "<ul class='todays-rotation'>";
 for ($period = 1; $period <= count($base_periods); $period++) {
     if ($period == 5) {
-        // For period 5, we force the start time to "11:11", regardless of lunch selection,
-        // because the overall block always starts at 11:11.
+        // For period 5, we force the start time to "11:11", regardless of lunch selection, because the overall block always starts at 11:11.
         $times = $base_periods[$period];
         $times['start'] = "11:11";
         $block_name = $rotation[$rotation_day][4];
         $lunch = $lunch_options[$lunch_choice];
         // Output both the 5th period block name and the lunch info.
-        $block = "$block_name – {$lunch['label']} ({$lunch['start']}–{$lunch['end']})";
+        $block = "$block_name <br> <span class='lunch-time'>{$lunch['label']} ({$lunch['start']}–{$lunch['end']})</span>";
     } else {
         $block = $rotation[$rotation_day][$period - 1];
         $times = $base_periods[$period];
@@ -183,11 +197,6 @@ for ($period = 1; $period <= count($base_periods); $period++) {
 }
 echo "</ul>";
 
-ob_end_flush();
-?>
+ob_end_flush(); ?>
 
-<style>
-    li {
-        margin-bottom: 0.2rem;
-    }
-</style>
+</div>
