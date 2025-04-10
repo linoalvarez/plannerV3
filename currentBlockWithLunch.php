@@ -1,3 +1,9 @@
+<style>
+    :root {
+        font-size: 1.5rem;
+    }
+</style>
+
 <?php
 ob_start(); // Start output buffering
 
@@ -5,7 +11,6 @@ ob_start(); // Start output buffering
 if (isset($_GET['clear_lunch'])) {
     setcookie("lunch_choice", "", time() - 3600);
     unset($_COOKIE['lunch_choice']);
-    // Redirect to avoid the GET parameter sticking.
     header("Location: " . strtok($_SERVER["REQUEST_URI"], '?'));
     exit;
 }
@@ -16,10 +21,8 @@ if (isset($_GET['clear_lunch'])) {
 </head>
 
 <?php
-// Set the timezone to Boston, MA
 date_default_timezone_set('America/New_York');
 
-// All the necessary data is included
 include('data/data-holidays-specialdays.php');
 
 // Get current date and time
@@ -28,7 +31,7 @@ $current_time = date("H:i:s");
 
 // Debug output: current date and time
 echo "Current Time: $current_time / ";
-echo "Current Date: $current_date<br><br>";
+echo "Current Date: $current_date<br>";
 
 // Define lunch options array
 $lunch_options = [
@@ -37,15 +40,13 @@ $lunch_options = [
     '3' => ['label' => 'Lunch 3', 'start' => '11:56', 'end' => '12:18']
 ];
 
-// Check if a lunch choice was provided via GET and is valid.
+// If a lunch choice is provided via GET and is valid, set/update the cookie.
 if (isset($_GET['lunch_choice']) && isset($lunch_options[$_GET['lunch_choice']])) {
-    // Set a cookie valid until tomorrow.
     setcookie("lunch_choice", $_GET['lunch_choice'], strtotime('tomorrow'));
-    // Also set the $_COOKIE immediately so the script can use it in this load.
     $_COOKIE['lunch_choice'] = $_GET['lunch_choice'];
 }
 
-// If there's no lunch choice stored in a cookie, prompt the user.
+// If there's no lunch choice stored in a cookie, show the selection form.
 if (!isset($_COOKIE['lunch_choice']) || !isset($lunch_options[$_COOKIE['lunch_choice']])) {
     echo '<form method="get">';
     echo '<label>Select your lunch for today:</label><br>';
@@ -54,7 +55,7 @@ if (!isset($_COOKIE['lunch_choice']) || !isset($lunch_options[$_COOKIE['lunch_ch
     }
     echo '<input type="submit" value="Submit">';
     echo '</form>';
-    ob_end_flush(); // Flush the buffer before exiting.
+    ob_end_flush();
     exit;
 }
 
@@ -73,10 +74,10 @@ if (array_key_exists($current_date, $holidays)) {
     exit;
 }
 
-// Check if today is a special day (if you want to do something different for these days, adjust accordingly)
+// Check if today is a special day
 if (array_key_exists($current_date, $special_days)) {
     echo "Special day today: " . $special_days[$current_date][0] . "<br>";
-    // For purposes of rotation, we still count it as a school day.
+    // The day still counts for the rotation.
 }
 
 // --- Calculate current rotation day ---
@@ -95,8 +96,8 @@ while ($current_timestamp <= $today_timestamp) {
 
 $rotation_day = (($school_day_count - 1) % 8) + 1;
 $days_left = 180 - $school_day_count;
-echo "$school_day_count days down / $days_left days to go <br><br>";
-echo "Today is a Day $rotation_day<br><br>";
+echo "$school_day_count days down / $days_left days to go <br>";
+echo "Today is a Day $rotation_day<br>";
 
 // --- Determine the current period ---
 $current_period = null;
@@ -107,44 +108,49 @@ foreach ($base_periods as $period => $times) {
     }
 }
 
-// Special handling for period 5 (lunch period)
+$current_block = null;
 if ($current_period == 5) {
-    $lunch_interval = $lunch_options[$lunch_choice];
-    if ($current_time >= $lunch_interval['start'] && $current_time < $lunch_interval['end']) {
-        $current_block = $lunch_interval['label'];
+    $lunch = $lunch_options[$lunch_choice];
+    if ($current_time >= $lunch['start'] && $current_time < $lunch['end']) {
+        $current_block = $lunch['label'];
     } else {
-        $current_block = $rotation[$rotation_day][5 - 1];
+        $current_block = $rotation[$rotation_day][4]; // period 5 uses index 4
     }
-}
-
-if ($current_period !== 5 && $current_period !== null) {
+} elseif ($current_period !== null) {
     $current_block = $rotation[$rotation_day][$current_period - 1];
-}
-
-if ($current_period === null) {
+} else {
     echo "School not in session. Go play!";
     ob_end_flush();
     exit;
 }
 
-echo "Current Period: Period " . $current_period . "<br>";
-echo "Current Block: <strong>" . $current_block . "</strong><br><br><br>";
+echo "Currently in Period " . $current_period . "<br>";
+echo "Current Block: <strong>" . $current_block . "</strong><br><br>";
 
-echo "Classes for Today (Rotation Day $rotation_day):<br>";
+// --- Display today's schedule ---
+echo "Classes for Today (Day $rotation_day):<br>";
 echo "<ul>";
 for ($period = 1; $period <= count($base_periods); $period++) {
     if ($period == 5) {
-        $block = $lunch_options[$lunch_choice]['label'];
-        $times = [
-            'start' => $lunch_options[$lunch_choice]['start'],
-            'end' => $lunch_options[$lunch_choice]['end']
-        ];
+        // For period 5, we force the start time to "11:11", regardless of lunch selection,
+        // because the overall block always starts at 11:11.
+        $times = $base_periods[$period];
+        $times['start'] = "11:11";
+        $block_name = $rotation[$rotation_day][4];
+        $lunch = $lunch_options[$lunch_choice];
+        // Output both the 5th period block name and the lunch info.
+        $block = "$block_name – {$lunch['label']} ({$lunch['start']}–{$lunch['end']})";
     } else {
         $block = $rotation[$rotation_day][$period - 1];
         $times = $base_periods[$period];
     }
+
     $display = $times['start'] . "<br>" . $times['end'] . " - " . $block;
-    if ($block == $current_block) {
+
+    if (
+        ($period == 5 && (strpos($block, $current_block) !== false)) ||
+        ($block == $current_block)
+    ) {
         echo "<li><strong>$display</strong></li>";
     } else {
         echo "<li>$display</li>";
@@ -152,8 +158,9 @@ for ($period = 1; $period <= count($base_periods); $period++) {
 }
 echo "</ul>";
 
-ob_end_flush(); // Flush the output buffer.
+ob_end_flush();
 ?>
+
 <style>
     li {
         margin-bottom: 0.2rem;
