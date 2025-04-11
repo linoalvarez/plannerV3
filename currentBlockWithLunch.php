@@ -2,9 +2,14 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
-:root {
+    :root {
         font-size: 1.25rem;
         font-family: georgia;
+        cursor: default;
+    }
+
+    ::selection {
+        color: red;
     }
 
     h2 {
@@ -15,7 +20,7 @@
     }
 
     .wrapper {
-        width: max-content;
+        width: 20rem;
         padding: 3rem 3rem 3rem;
         border: 1px solid #3333;
         border-radius: 5px;
@@ -58,6 +63,11 @@
 
     li {
         padding: 0.2rem 1.5rem 0.2rem 0.5rem;
+        transition: .1s all ease-in-out;
+    }
+
+    li:hover {
+        background-color: #ccc;
     }
     
     li strong {
@@ -75,6 +85,15 @@
         font-weight: 900;
         margin-bottom: 0.5rem;
         text-align: center;
+        font-size: 1.2rem;
+    }
+
+    .today-weekday {
+        text-align: center;
+        font-family: 'Roboto mono';
+        color: #555;
+        font-size: .7rem;
+        margin-bottom: 1rem;
     }
 
     .time-left {
@@ -87,24 +106,46 @@
 
     label[for] {
         display: block;
-        padding: 1rem  .5rem ;
+        margin-top: .5rem;
+        padding: .5rem  .5rem ;
         transition: .2s all ease-in-out;
+        /* width: max-content; */
+    }
+
+    form label:first-of-type {
+        font-size: .75rem;
+        font-family: 'Roboto condesed';
+        color: #666;
     }
 
     label[for]:hover {
         color: darkblue;
-        background-color: darkorange;
+        background-color: #ccc;
+        border-radius: 5px;
+        opacity: .75;
     }
 
     input[type="radio"]:checked + label {
         color: red;
         background-color: darkblue;
         color: darkorange;
+        border-radius: 10px;
         /* font-weight: bold; */
+        opacity: .81;
     }
 
     input[type="radio"] {
         display: none;
+    }
+
+    input[type="submit"] {
+        opacity: .5;
+        transition: .1s all ease-in-out;
+    }
+    
+    input[type="submit"]:hover {
+        cursor: pointer;
+        opacity: .95;
     }
 
 </style>
@@ -121,7 +162,7 @@ if (isset($_GET['clear_lunch'])) {
 }
 ?>
 <head>
-    <meta http-equiv="refresh" content="1550">
+    <meta http-equiv="refresh" content="30">
     <title>Current Block with Lunch</title>
 </head>
 <body>
@@ -145,14 +186,18 @@ if (($handle = fopen("data/data-LAS.csv", "r")) !== FALSE) {
 }
 
 // Get current date and time
+$current_date_format = date("d-F-Y");
 $current_date = date("Y-m-d");
-$current_time = date("H:i:s");
+$current_time = date("H:i");
+
+$current_date_weekday = date("l");
 
 // Debug output: current date and time
 echo "<div class='now'>";
-echo "Date: $current_date / ";
-echo "Time: $current_time";
+echo "$current_date_format - $current_time";
 echo "</div>";
+echo "<div class='today-weekday'>$current_date_weekday</div>";
+
 
 // Define lunch options array
 $lunch_options = [
@@ -225,7 +270,7 @@ $days_left = 180 - $school_day_count;
 echo "<div class='school-day-count'>";
 echo "$school_day_count days down / $days_left to go";
 echo "</div>";
-echo "<div class='amsa-day'>Today is a Day $rotation_day</div>";
+//echo "<div class='amsa-day'>Today is a Day $rotation_day</div>";
 
 // --- Determine the current and next period ---
 $current_period = null;
