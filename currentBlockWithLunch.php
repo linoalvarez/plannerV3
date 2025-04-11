@@ -357,7 +357,6 @@ if ($current_period !== null) {
 }
 
 // --- Display today's schedule ---
-echo "</div>";
 echo "<div class='schedule'>";
 echo "<h2 class='classes-for-today'>Today Schedule (Day <strong>$rotation_day</strong>)</h2>";
 echo "<ul class='todays-rotation'>";
