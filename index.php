@@ -212,7 +212,7 @@ foreach ($categories as $category) {
                     $class_info = $class_data_for_student[$block_name] ?? null;
                     $class_str = $class_info ? "<span class='class-name'>{$class_info['class_name']}</span> <span class='teacher-name'>{$class_info['teacher']}</span> <span class='room-number'>{$class_info['room']}</span>" : "No class info available";
                     
-                    echo "<div class='period'>";
+                    echo "<div class='period $block_name'>";
                     
                     echo "<div class='br-checkbox'> <label> <input type='checkbox' /> <span></span> </label> </div>";
                     echo "<div class='br-checkbox'> <label> <input type='checkbox' /> <span></span> </label> </div>";

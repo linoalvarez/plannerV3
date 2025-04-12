@@ -114,13 +114,6 @@ header {
     opacity: .5;
 }
 
-.school-day:nth-of-type(odd) .school-day-count {
-    right: 1rem;
-}
-
-.school-day:nth-of-type(even) .school-day-count {
-    left: 1rem;
-}
 
 header {
     /* display: flex; */
@@ -177,7 +170,14 @@ main {
     grid-template-columns: max-content 1fr;
     border-top: 1px solid #3331;
     gap: 1rem;
-    padding: .75rem 1rem;
+    padding: .8rem 1rem;
+}
+
+div.school-day .period.h1,
+div.school-day .period.h2 {
+    /* padding-top: 0rem; */
+    /* padding-bottom: 0rem; */
+    background-color: #f8f8f8;
 }
 
 .school-day:nth-of-type(odd) .period {
@@ -242,28 +242,40 @@ footer {
     opacity: .25;
     width: max-content;
     position: absolute;
-    bottom: 21.2rem;
+    bottom: 0.8rem;
+    left: 1.6rem;
 }
 
+/* .school-day:nth-of-type(odd) .school-day-count {
+    right: 1rem;
+}
+
+.school-day:nth-of-type(even) .school-day-count {
+    left: 1rem;
+} */
+
 main .period:nth-of-type(5):before {
-    content: 'L U N C H';
+    content: 'LUNCH';
     position: absolute;
-    top: -1.05rem;
-    left: 188px;
-    letter-spacing: 18px;
+    top: 2.15rem;
+    left: -37px;
+    letter-spacing: 4px;
     color: #333;
-    opacity: .15;
-    font-size: 0.7rem;
+    opacity: .5;
+    font-size: 0.6rem;
+    transform: rotate(-90deg);
 }
 
 main .period:nth-of-type(5) {
     /* padding-top: 3rem; */
-    border-top: 1.3rem solid #f9f9f9;
+    border-left: 1.3rem solid #f0f0f0;
+    /* border-left: 1.3rem solid #f00; */
+    padding-left: 0.7rem !important;
     position: relative;
 }
 
 footer  {
-    position: relative;
+    /* position: relative; */
 }
 
 /* 
