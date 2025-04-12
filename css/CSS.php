@@ -243,16 +243,16 @@ footer {
     width: max-content;
     position: absolute;
     bottom: 0.4rem;
+    /* left: 2.6rem; */
+}
+
+.school-day:nth-of-type(odd) .school-day-count {
     left: 2.6rem;
 }
 
-/* .school-day:nth-of-type(odd) .school-day-count {
-    right: 1rem;
-}
-
 .school-day:nth-of-type(even) .school-day-count {
-    left: 1rem;
-} */
+    left: 1.6rem;
+} 
 
 main .period:nth-of-type(5) .class-info:before {
     content: 'LUNCH';
