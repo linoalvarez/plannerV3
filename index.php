@@ -9,6 +9,24 @@
 
 <?php include('css/CSS-extra.php'); ?>
 
+<style>
+    .reference {
+        border: 1px solid red;
+        /* width: 5.83in; */
+        /* height: 8.27in; */
+        /* width: 5.5in; */
+        /* height: 8.5in; */
+        width: 148mm;
+        height: 210mm;
+        position: fixed;
+        top: 2mm;
+        left: 2mm;
+        z-index: 99;
+    }
+</style>
+
+<div class="no-print reference"></div>
+
 <?php
     $start_date = strtotime("2024-08-27");  // Start date
     $end_date = strtotime("2025-06-12");    // End date

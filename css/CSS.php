@@ -126,7 +126,7 @@ header {
     /* display: flex; */
     gap: 5px 10px;
     justify-content: space-between;
-    padding: 1rem 0;
+    padding: 0.4rem 0 0.6rem 0;
     background-color: #ddd9;
     text-align: center;
     font-size: .75rem;
@@ -177,11 +177,11 @@ main {
     grid-template-columns: max-content 1fr;
     border-top: 1px solid #3331;
     gap: 1rem;
-    padding: .6rem 1rem;
+    padding: .75rem 1rem;
 }
 
 .school-day:nth-of-type(odd) .period {
-    padding: .6rem 0rem .6rem 2rem ;
+    padding: .75rem 0rem .75rem 2rem ;
 }
 
 .start-time {
@@ -242,22 +242,23 @@ footer {
     opacity: .25;
     width: max-content;
     position: absolute;
-    bottom: 20rem;
+    bottom: 21.2rem;
 }
 
 main .period:nth-of-type(5):before {
     content: 'L U N C H';
     position: absolute;
-    top: -1.5rem;
-    left: 130px;
-    letter-spacing: 23px;
+    top: -1.05rem;
+    left: 188px;
+    letter-spacing: 18px;
     color: #333;
     opacity: .15;
+    font-size: 0.7rem;
 }
 
 main .period:nth-of-type(5) {
     /* padding-top: 3rem; */
-    border-top: 2rem solid #f9f9f9;
+    border-top: 1.3rem solid #f9f9f9;
     position: relative;
 }
 
@@ -456,12 +457,12 @@ img:nth-of-type(2) {right: 1rem;}
     }
 
     .wrapper {
-        margin: 0;
+        /* margin: 0; */
     }
 
     .school-day {
-        margin: 0;
-        margin-top:2rem;
+        margin: 2mm 0 0 2mm;
+        /* margin-top:2rem; */
         /* width: 100%; */
     }
 
@@ -470,8 +471,8 @@ img:nth-of-type(2) {right: 1rem;}
     .school-day {
         /* margin-top: 2rem; */
         /* width: 100%; */
-        zoom: .96;
-        margin: 0rem 0rem 0rem 1rem;
+        /* zoom: .96; */
+        /* margin: 0rem 0rem 0rem 1rem; */
         page-break-after: always;
     }
     
