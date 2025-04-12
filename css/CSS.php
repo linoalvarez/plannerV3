@@ -117,9 +117,9 @@ header {
 
 header {
     /* display: flex; */
-    gap: 5px 10px;
+    gap: 0px 10px;
     justify-content: space-between;
-    padding: 0.4rem 0 0.6rem 0;
+    padding: 0.5rem 0 0.7rem 0;
     background-color: #ddd9;
     text-align: center;
     font-size: .75rem;
@@ -181,7 +181,7 @@ div.school-day .period.h2 {
 }
 
 .school-day:nth-of-type(odd) .period {
-    padding: .75rem 0rem .75rem 2rem ;
+    padding: .85rem 0rem .85rem 2rem ;
 }
 
 .start-time {
@@ -234,7 +234,7 @@ footer {
 }
 
 .school-day-count {
-    /* font-weight: bold; */
+    /* font-weight: 900; */
     font-size: .5em;
     padding-top: .5rem;
     font-family: monospace;
@@ -242,8 +242,8 @@ footer {
     opacity: .25;
     width: max-content;
     position: absolute;
-    bottom: 0.8rem;
-    left: 1.6rem;
+    bottom: 0.4rem;
+    left: 2.6rem;
 }
 
 /* .school-day:nth-of-type(odd) .school-day-count {
@@ -254,19 +254,19 @@ footer {
     left: 1rem;
 } */
 
-main .period:nth-of-type(5):before {
+main .period:nth-of-type(5) .class-info:before {
     content: 'LUNCH';
     position: absolute;
-    top: 2.15rem;
-    left: -37px;
+    top: 1.4rem;
+    left: -35px;
     letter-spacing: 4px;
     color: #333;
     opacity: .5;
-    font-size: 0.6rem;
+    font-size: 0.5rem;
     transform: rotate(-90deg);
 }
 
-main .period:nth-of-type(5) {
+main .period:nth-of-type(5) .class-info {
     /* padding-top: 3rem; */
     border-left: 1.3rem solid #f0f0f0;
     /* border-left: 1.3rem solid #f00; */
