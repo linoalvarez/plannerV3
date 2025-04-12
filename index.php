@@ -215,8 +215,8 @@ foreach ($categories as $category) {
                     echo "<div class='period $block_name'>";
                     
                     echo "<div class='br-checkbox'> <label> <input type='checkbox' /> <span></span> </label> </div>";
-                    echo "<div class='br-checkbox'> <label> <input type='checkbox' /> <span></span> </label> </div>";
-                    echo "<div class='br-checkbox'> <label> <input type='checkbox' /> <span></span> </label> </div>";
+                    // echo "<div class='br-checkbox'> <label> <input type='checkbox' /> <span></span> </label> </div>";
+                    // echo "<div class='br-checkbox'> <label> <input type='checkbox' /> <span></span> </label> </div>";
 
                     echo "<div class='period-time'>";
                     echo "<div class='start-time'>{$times['start']}</div>";

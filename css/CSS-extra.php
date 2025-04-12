@@ -182,7 +182,7 @@
 .school-day:nth-of-type(7)  .period:nth-of-type(6) .br-checkbox:nth-of-type(1),
 .school-day:nth-of-type(6)  .period:nth-of-type(7) .br-checkbox:nth-of-type(1),
 .school-day:nth-of-type(5)  .period:nth-of-type(8) .br-checkbox:nth-of-type(1)  {
-    right: 40%;
+    /* right: 40%; */
     /* background-color: red; */
 }
 

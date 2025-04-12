@@ -126,7 +126,7 @@ header {
 }
 
 header .date {
-    font-size: 3.3rem;
+    font-size: 3rem;
     display: block;
 }
 
@@ -162,7 +162,7 @@ header .date {
 main {
     display: flex;
     flex-direction: column;
-    /* gap: 5px; */
+    gap: 2px;
 }
 
 .period {
@@ -215,7 +215,7 @@ div.school-day .period.h2 {
 }
 
 .class-name {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 .teacher-name {
@@ -358,8 +358,8 @@ table td:first-of-type {
 
 .br-checkbox {
     position: absolute;
-    right: 0px;
-    opacity: .25;
+    right: 5px;
+    opacity: .5;
 }
 
 .br-checkbox label {
@@ -372,8 +372,11 @@ table td:first-of-type {
     display: inline-block;
     width: 0.5in;
     height: 1px;
-    background-color: #3333;
+    background-color: #555;
 }
+
+
+/* hide repetitive list items for long vacations, leaving start and end visible only */
 
 .no-school-days div:nth-of-type(1) li:nth-of-type(26),
 .no-school-days div:nth-of-type(1) li:nth-of-type(25),
@@ -455,6 +458,44 @@ img:nth-of-type(2) {right: 1rem;}
     left: 25%;
     border: 1px solid #ddd;
 }
+
+/* DS Pass on H1 and H2 */
+
+
+.h1 .class-info:after ,
+.h2 .class-info:after ,
+.h1:before,
+.h1:after,
+.h2:before,
+.h2:after {
+    opacity: .25;
+    top: 2.5rem;
+    font-size: .7rem;
+}
+
+.h1 .class-info:after ,
+.h2 .class-info:after {
+    content: 'DS Pass';
+    position: absolute;
+    left: 12rem;
+}
+
+.h1:before,
+.h2:before {
+    content: 'Left DS';
+    /* background-color: red; */
+    position: absolute;
+    left: 17rem;
+}
+
+.h1:after,
+.h2:after {
+    content: 'Back to DS';
+    /* background-color: red; */
+    position: absolute;
+    left: 22rem;
+}
+
 
 @media print {
 
