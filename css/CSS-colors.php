@@ -21,7 +21,7 @@
 
 body {margin: 0;}
 
-.wrapper { display: grid;grid-template-columns: repeat(4,1fr);}
+.wrapper-colors { display: grid;grid-template-columns: repeat(4,1fr);}
 
 div {padding: 1rem;}
 

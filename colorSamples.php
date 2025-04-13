@@ -1,6 +1,6 @@
 <?php include('css/CSS-extra.php'); ?>
 
-<div class="wrapper">
+<div class="wrapper-colors">
     <div class="gray0">gray0</div>
     <div class="gray1">gray1</div>
     <div class="gray2">gray2</div>
