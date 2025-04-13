@@ -19,11 +19,11 @@
     }
 
 
-body {margin: 0;}
+/* body {margin: 0;} */
 
 .wrapper-colors { display: grid;grid-template-columns: repeat(4,1fr);}
 
-div {padding: 1rem;}
+.wrapper-colors > div {padding: 1rem;}
 
 .gray0 {background-color: var(--gray0)}
 .gray1 {background-color: var(--gray1)}
