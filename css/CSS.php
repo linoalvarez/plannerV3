@@ -2,6 +2,27 @@
 
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap');
 
+
+.reference {
+        border: 1px solid red;
+        /* width: 5.83in; */
+        /* height: 8.27in; */
+        /* width: 5.5in; */
+        /* height: 8.5in; */
+        width: 148mm;
+        height: 210mm;
+        position: fixed;
+        top: 2mm;
+        left: 2mm;
+        z-index: 99;
+        display: none;
+    }
+
+.reference:hover {
+    /* display: none; */
+    z-index: -100;
+    }
+
 form {
     z-index: 99;
     position: fixed;
@@ -23,7 +44,7 @@ html {
     box-sizing: border-box;
     /* font-size: 20px; */
     font-family: georgia;
-    color: #333;
+    /* color: #333; */
 }
 
 body {
@@ -56,7 +77,7 @@ header {
     padding: 3px 15px;
     font-size: 14px;
     box-shadow: 0 0 5px 1px #333;
-    opacity: .9;
+    /* opacity: .9; */
 }
 
 .school-day {
@@ -96,7 +117,7 @@ header {
 
 .student-info h1,
 .student-info h2{
-    opacity: .8;
+    /* opacity: .8; */
 }
 
 .student-info h2{
@@ -111,7 +132,7 @@ header {
     font-weight: 100;
     font-family: monospace;
     font-size: .8rem;
-    opacity: .5;
+    /* opacity: .5; */
 }
 
 
@@ -132,7 +153,7 @@ header .date {
 
 .amsa-day,
 .weekday { 
-    opacity: .5;
+    /* opacity: .5; */
     font-family: verdana;
     font-size: .75rem;
     }
@@ -147,7 +168,7 @@ header .date {
 
 .date {
     font-weight: bold;
-    opacity: .8;
+    /* opacity: .8; */
 }
 
 .school-day header {
@@ -197,7 +218,7 @@ div.school-day .period.h2 {
 .start-time {
     font-size: .65rem;
     font-family: monospace;
-    opacity: .6;
+    /* opacity: .6; */
 }
 
 .block-name {
@@ -207,7 +228,7 @@ div.school-day .period.h2 {
 
 .class-info {
     font-size: 0.8em;
-    color: #555;
+    /* color: #555; */
 }
 
 .class-info span{
@@ -224,7 +245,7 @@ div.school-day .period.h2 {
 
 .room-number {
     /* font-weight: bold; */
-    color: #aaa;
+    /* color: #aaa; */
 }
 
 footer {
@@ -239,7 +260,7 @@ footer {
     padding-top: .5rem;
     font-family: monospace;
     position: absolute;
-    opacity: .25;
+    /* opacity: .25; */
     width: max-content;
     position: absolute;
     bottom: 0.4rem;
@@ -257,13 +278,18 @@ footer {
 main .period:nth-of-type(5) .class-info:before {
     content: 'LUNCH';
     position: absolute;
-    top: 1.4rem;
-    left: -35px;
+    top: 35px;
+    left: 62px;
     letter-spacing: 4px;
-    color: #333;
-    opacity: .5;
+    /* color: #333; */
+    /* opacity: .5; */
     font-size: 0.5rem;
     transform: rotate(-90deg);
+}
+
+main .period {
+    position: relative;
+
 }
 
 main .period:nth-of-type(5) .class-info {
@@ -271,7 +297,6 @@ main .period:nth-of-type(5) .class-info {
     border-left: 1.3rem solid #f0f0f0;
     /* border-left: 1.3rem solid #f00; */
     padding-left: 0.7rem !important;
-    position: relative;
 }
 
 footer  {
@@ -313,7 +338,7 @@ footer  {
 }
 
 .grid-schedule .teacher {
-    color: #3337;
+    /* color: #3337; */
     font-size: .8rem;
 }
 
@@ -359,7 +384,7 @@ table td:first-of-type {
 .br-checkbox {
     position: absolute;
     right: 5px;
-    opacity: .5;
+    /* opacity: .5; */
 }
 
 .br-checkbox label {
@@ -371,7 +396,7 @@ table td:first-of-type {
 .br-checkbox span {
     display: inline-block;
     width: 0.5in;
-    height: 1px;
+    height: 0.5px;
     background-color: #555;
 }
 
@@ -404,7 +429,7 @@ table td:first-of-type {
     font-family: georgia;
     letter-spacing: 0px;
     text-transform: capitalize;
-    color: #3339;
+    /* color: #3339; */
     border-bottom: 3px solid #3335;
     padding-bottom: 5px;
 }
@@ -444,7 +469,7 @@ img:nth-of-type(1),
 img:nth-of-type(2) {
     width: 4rem;
     position: absolute;
-    opacity: .2;
+    /* opacity: .2; */
     /* border: 1px solid #ddd; */
 }
 
@@ -468,7 +493,7 @@ img:nth-of-type(2) {right: 1rem;}
 .h1:after,
 .h2:before,
 .h2:after {
-    opacity: .25;
+    /* opacity: .25; */
     top: 2.5rem;
     font-size: .7rem;
 }

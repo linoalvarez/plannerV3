@@ -8,23 +8,7 @@
 <?php include('css/CSS.php'); ?>
 
 <?php include('css/CSS-colors.php'); ?>
-
-<style>
-    .reference {
-        border: 1px solid red;
-        /* width: 5.83in; */
-        /* height: 8.27in; */
-        /* width: 5.5in; */
-        /* height: 8.5in; */
-        width: 148mm;
-        height: 210mm;
-        position: fixed;
-        top: 2mm;
-        left: 2mm;
-        z-index: 99;
-    }
-</style>
-
+ 
 <div class="no-print reference"></div>
 
 <?php
