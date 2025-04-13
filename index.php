@@ -7,7 +7,7 @@
 
 <?php include('css/CSS.php'); ?>
 
-<?php include('css/CSS-extra.php'); ?>
+<?php include('css/CSS-colors.php'); ?>
 
 <style>
     .reference {
