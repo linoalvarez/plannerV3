@@ -86,6 +86,9 @@ $school_day_count = 0;
             <?php endif; ?>
         <?php endforeach; ?>
     </select>
+<br>
+    <input type="checkbox" id="teacher">Teacher
+
 </form>
 
 <?php if ($student_name): ?>
@@ -238,3 +241,24 @@ foreach ($categories as $category) {
 
     </div>
 <?php endif; ?>
+
+<script>
+document.getElementById('teacher').addEventListener('change', function () {
+    const stylesheetId = 'teacherStylesheet';
+    const existingLink = document.getElementById(stylesheetId);
+
+    if (this.checked) {
+        if (!existingLink) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'css/teacher.css'; // Path to your stylesheet
+            link.id = stylesheetId;
+            document.head.appendChild(link);
+        }
+    } else {
+        if (existingLink) {
+            existingLink.remove();
+        }
+    }
+});
+</script>

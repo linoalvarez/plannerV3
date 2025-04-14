@@ -250,7 +250,7 @@ div.school-day .period.h2 {
 
 .teacher-name {
     font-style: italic;
-    color:red;
+    color:;
 }
 
 .room-number {
