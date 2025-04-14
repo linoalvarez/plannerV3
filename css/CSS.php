@@ -128,7 +128,7 @@ header {
 
 .student-info h3{
     margin-top: 0;
-    margin-bottom: 10rem;
+    margin-bottom: 13rem;
     font-weight: 100;
     font-family: monospace;
     font-size: .8rem;
@@ -245,10 +245,12 @@ div.school-day .period.h2 {
 
 .class-name {
     font-size: 1.3rem;
+    font-weight: 900;
 }
 
 .teacher-name {
     font-style: italic;
+    color:red;
 }
 
 .room-number {
@@ -335,7 +337,7 @@ footer  {
 }
 
 .grid-schedule .teacher {
-    /* color: #3337; */
+    color: var(--gray7);
     font-size: .8rem;
 }
 
@@ -344,8 +346,10 @@ footer  {
 }
 
 .grid-schedule .room {
+    color: var(--gray7);
     /* font-weight: 900; */
-    text-align: right;
+    font-size: .8rem;
+    text-align: left;
 
 }
 

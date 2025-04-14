@@ -1,28 +1,28 @@
-<title>AMSA Planner</title>
 <?php
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);
     header("Pragma: no-cache");
-?>
+    ?>
+
+<title>AMSA Planner</title>
 
 <?php include('css/CSS.php'); ?>
-
 <?php include('css/CSS-colors.php'); ?>
+<?php include('data/data-holidays-specialdays.php'); ?>
  
 <div class="no-print reference"></div>
 
 <?php
+    
     $start_date = strtotime("2024-08-27");  // Start date
     $end_date = strtotime("2025-06-12");    // End date
 
-include('data/data-holidays-specialdays.php');
-
-
 // Read data from the CSV file and store in an associative array
-$data_file = fopen("data/data.csv", "r");
-$class_data = [];
-$students = [];
-$header_skipped = false;
+
+    $data_file = fopen("data/data.csv", "r");
+    $class_data = [];
+    $students = [];
+    $header_skipped = false;
 
 while (($row = fgetcsv($data_file)) !== FALSE) {
     // Skip the header row
@@ -52,15 +52,16 @@ while (($row = fgetcsv($data_file)) !== FALSE) {
 }
 fclose($data_file);
 
-// Get selected student from dropdown, if any
-$selected_student = $_GET['student'] ?? '';
-$student_name = $students[$selected_student] ?? '';
-$student_email = $selected_student;
-$class_data_for_student = $class_data[$selected_student] ?? [];
+    // Get selected student from dropdown, if any
+    $selected_student = $_GET['student'] ?? '';
+    $student_name = $students[$selected_student] ?? '';
+    $student_email = $selected_student;
+    $class_data_for_student = $class_data[$selected_student] ?? [];
 
-// Sort students by last name
-// Split the student name into first and last name, then sort
-uasort($students, function($a, $b) {
+    // Sort students by last name
+    // Split the student name into first and last name, then sort
+    
+    uasort($students, function($a, $b) {
     // Assume names are "First Last"
     $last_name_a = explode(" ", $a)[1] ?? $a; // Get last name, if possible
     $last_name_b = explode(" ", $b)[1] ?? $b; // Get last name, if possible
