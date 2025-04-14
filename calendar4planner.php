@@ -7,7 +7,7 @@
 <style>
 
 ::selection {
-    background-color: transparent;
+    background-color: yellow;
     color: #000;
 }
 

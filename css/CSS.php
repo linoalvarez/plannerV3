@@ -1,16 +1,15 @@
 <style>
-
-@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Xanh+Mono:ital@0;1&display=swap');
 
 
 .reference {
         border: 1px solid red;
         /* width: 5.83in; */
         /* height: 8.27in; */
-        /* width: 5.5in; */
-        /* height: 8.5in; */
-        width: 148mm;
-        height: 210mm;
+        width: 5.5in;
+        height: 8.5in;
+        /* width: 148mm; */
+        /* height: 210mm; */
         position: fixed;
         top: 2mm;
         left: 2mm;
@@ -70,14 +69,15 @@ header {
     position: absolute;
     width: 10rem;
     transform-origin: 50% 50%;
-    transform: translate(292px, 40px);
+    transform: translate(275px, 40px);
     /* top: 37px; */
     /* right: 92px; */
     background: yellow;
-    padding: 3px 15px;
+    padding: 3px 5px;
     font-size: 14px;
     box-shadow: 0 0 5px 1px #333;
-    /* opacity: .9; */
+    opacity: .8;
+    z-index: 99;
 }
 
 .school-day {
@@ -96,13 +96,13 @@ header {
     border: 1px solid #ccc;
     border-radius: 2.5px;
     /* half letter */
-    /*  A5*/
+    width: 5.5in;
+    height: 8.5in;
     /* width: 5.83in; */
     /* height: 8.27in; */
-    /* width: 5.5in; */
-    /* height: 8.5in; */
-    width: 148mm;
-    height: 210mm;
+    /*  A5*/
+    /* width: 148mm; */
+    /* height: 210mm; */
     position:relative;
 }
 
@@ -140,7 +140,7 @@ header {
     /* display: flex; */
     gap: 0px 10px;
     justify-content: space-between;
-    padding: 0.5rem 0 0.7rem 0;
+    padding: 1rem 0 1.2rem 0;
     background-color: #ddd9;
     text-align: center;
     font-size: .75rem;
@@ -177,7 +177,11 @@ header .date {
 }
 
 header .date {
+    font-family: 'Xanh Mono';
+    font-family: 'Helvetica';
+    letter-spacing: -1px;
     grid-column: 1/-1;
+    font-weight: 900;
 }
 
 main {
@@ -189,9 +193,13 @@ main {
 .period {
     display: grid;
     grid-template-columns: max-content 1fr;
-    border-top: 1px solid #3331;
+    border-bottom: 1px solid #333;
     gap: 1rem;
     padding: .8rem 1rem;
+}
+
+.period:last-of-type {
+    /* border-bottom: 1px solid #333; */
 }
 
 div.school-day .period.h1,
@@ -202,7 +210,7 @@ div.school-day .period.h2 {
 }
 
 .school-day:nth-of-type(odd) .period {
-    padding: .85rem 0rem .85rem 2rem ;
+    /* padding: .85rem 0rem .85rem 2rem ; */
 }
 
 .start-time {
@@ -257,29 +265,22 @@ footer {
 .school-day-count {
     /* font-weight: 900; */
     font-size: .5em;
-    padding-top: .5rem;
+    /* padding-top: .5rem; */
     font-family: monospace;
     position: absolute;
     /* opacity: .25; */
     width: max-content;
     position: absolute;
-    bottom: 0.4rem;
-    /* left: 2.6rem; */
+    top: 2.9rem;
+    left: 20.1rem;
+    transform: rotate(-90deg)
 }
-
-.school-day:nth-of-type(odd) .school-day-count {
-    left: 2.6rem;
-}
-
-.school-day:nth-of-type(even) .school-day-count {
-    left: 1.6rem;
-} 
 
 main .period:nth-of-type(5) .class-info:before {
     content: 'LUNCH';
     position: absolute;
     top: 35px;
-    left: 62px;
+    left: 48px;
     letter-spacing: 4px;
     /* color: #333; */
     /* opacity: .5; */
@@ -322,10 +323,6 @@ footer  {
     position: absolute;
 }
 */
-
-.period:last-of-type {
-    border-bottom-color: #3331;
-}
 
 .grid-schedule tr th,
 .grid-schedule thead {
@@ -387,7 +384,13 @@ table td:first-of-type {
     /* opacity: .5; */
 }
 
+.br-checkbox input {
+    display: none;
+}
+
 .br-checkbox label {
+    position: relative;
+    top:1rem;
     display: inline-flex;
     align-items: baseline;
     gap: 8px;
@@ -458,7 +461,7 @@ table td:first-of-type {
 
 .no-school-days {
     padding-top: 4rem;
-    font-size: .8rem;
+    font-size: .65rem;
     letter-spacing: 1px;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -524,10 +527,11 @@ img:nth-of-type(2) {right: 1rem;}
 
 @media print {
 
+    .student-info,
+    .school-day,
     .school-day:empty {
-        border-color: transparent;
+        border-color: transparent !important;
     }
-
 
     body {
         margin: 0;
