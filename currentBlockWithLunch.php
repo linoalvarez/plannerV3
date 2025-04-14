@@ -188,7 +188,7 @@ if (($handle = fopen("data/data-LAS.csv", "r")) !== FALSE) {
 // Get current date and time
 $current_date_format = date("d-F-Y");
 $current_date = date("Y-m-d");
-$current_time = date("H:i");
+$current_time = date("H:i:s");
 
 $current_date_weekday = date("l");
 
