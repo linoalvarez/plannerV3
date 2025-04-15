@@ -118,6 +118,7 @@ header {
 .student-info h1,
 .student-info h2{
     /* opacity: .8; */
+    color: var(--gray9)
 }
 
 .student-info h2{
@@ -133,6 +134,7 @@ header {
     font-family: monospace;
     font-size: .8rem;
     /* opacity: .5; */
+    color: var(--gray7)
 }
 
 
@@ -182,6 +184,7 @@ header .date {
     letter-spacing: -1px;
     grid-column: 1/-1;
     font-weight: 900;
+    color: var(--gray7)
 }
 
 main {
@@ -190,10 +193,13 @@ main {
     gap: 2px;
 }
 
+.period:not(:last-of-type) {
+    border-bottom: 1px solid var(--gray2);
+}
+
 .period {
     display: grid;
     grid-template-columns: max-content 1fr;
-    border-bottom: 1px solid #333;
     gap: 1rem;
     padding: .8rem 1rem;
 }
@@ -232,6 +238,7 @@ div.school-day .period.h2 {
 .block-name {
     text-align: center;
     font-size: 1.25rem;
+    color: var(--gray8)
 }
 
 .class-info {
@@ -246,6 +253,7 @@ div.school-day .period.h2 {
 .class-name {
     font-size: 1.3rem;
     font-weight: 900;
+    color: var(--gray8)
 }
 
 .teacher-name {
@@ -266,16 +274,17 @@ footer {
 
 .school-day-count {
     /* font-weight: 900; */
-    font-size: .5em;
+    font-size: .75em;
     /* padding-top: .5rem; */
     font-family: monospace;
     position: absolute;
     /* opacity: .25; */
+    color: var(--gray2);
     width: max-content;
     position: absolute;
-    top: 2.9rem;
-    left: 20.1rem;
-    transform: rotate(-90deg)
+    top: 50rem;
+    left: 31rem;
+    /* transform: rotate(-90deg) */
 }
 
 main .period:nth-of-type(5) .class-info:before {
@@ -476,7 +485,7 @@ img:nth-of-type(1),
 img:nth-of-type(2) {
     width: 4rem;
     position: absolute;
-    /* opacity: .2; */
+    opacity: .5;
     /* border: 1px solid #ddd; */
 }
 

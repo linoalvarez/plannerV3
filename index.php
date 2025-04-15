@@ -87,8 +87,9 @@ $school_day_count = 0;
         <?php endforeach; ?>
     </select>
 <br>
-    <input type="checkbox" id="teacher">Teacher
-
+<label for="teacher">
+  <input type="checkbox" id="teacher"> Teacher
+</label>
 </form>
 
 <?php if ($student_name): ?>
