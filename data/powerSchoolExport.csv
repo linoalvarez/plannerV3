@@ -1,0 +1,23 @@
+CC.EXPRESSION,COURSES.COURSE_NAME,TEACHERS.FIRST_NAME,TEACHERS.LAST_NAME,SECTIONS.ROOM,STUDENTS.FIRST_NAME,STUDENTS.LAST_NAME
+3(B),Health & Wellness 6,Jenna,Logan,FK,Eliza,Adams
+8(A),Directed Study 6,Elizabeth,Kaufman,308,Eliza,Adams
+8(B),Directed Study 6,Elizabeth,Kaufman,308,Eliza,Adams
+7(A-B),Computer Science 6,Padmaja,Bandaru,213,Eliza,Adams
+3(A),Biology 6,Christina,Jagielski,206,Eliza,Adams
+1(A-B) 2(A),PreAlg 6A,Raquel,Gelber,208,Eliza,Adams
+4(A-B),English Literature 6,Amanda,Morin,304,Eliza,Adams
+5(B),Reading & Writing Workshop,Amanda,Morin,304,Eliza,Adams
+5(A),Art-6,John,Morgan,319,Eliza,Adams
+6(A-B),History-6,Elizabeth,Kaufman,308,Eliza,Adams
+2(B),Intro to Latin - 6th Grade,Rachel,Caudill,203,Eliza,Adams
+6(B),Health & Wellness 6,Jenna,Logan,FK,Caleb,Allard
+8(A),Directed Study 6,John,Morgan,319,Caleb,Allard
+4(A-B),Computer Science 6,Tim,Tetreault,209,Caleb,Allard
+3(A),Biology 6,Christina,Jagielski,206,Caleb,Allard
+1(A-B) 2(A),PreAlg 6A,Raquel,Gelber,208,Caleb,Allard
+8(B),Academic Lab L.S.,Chad,Lawrence,302,Caleb,Allard
+3(B),Reading & Writing Workshop,Amanda,Morin,304,Caleb,Allard
+7(A-B),English Literature 6,Jennifer,Greffin,301,Caleb,Allard
+6(A),Art-6,John,Morgan,319,Caleb,Allard
+5(A-B),History-6,Elizabeth,Kaufman,200,Caleb,Allard
+2(B),Intro to Latin - 6th Grade,Rachel,Caudill,203,Caleb,Allard
