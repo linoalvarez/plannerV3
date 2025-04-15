@@ -16,7 +16,6 @@
         --gray14: #000E;
         --gray15: #000F;
     }
- 
 
 /* body {margin: 0;} */
 
@@ -40,5 +39,3 @@
 .gray13 {background-color: var(--gray13); color: #fff}
 .gray14 {background-color: var(--gray14); color: #fff}
 .gray15 {background-color: var(--gray15); color: #fff}
-
-
