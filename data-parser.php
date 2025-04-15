@@ -1,7 +1,7 @@
 <?php
 
 $inputFile = 'data/powerSchoolExport.csv';
-$outputFile = 'data.csv';
+$outputFile = 'data-parsed.csv';
 $outputRows = [];
 
 // Updated headers
