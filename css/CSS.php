@@ -233,6 +233,7 @@ div.school-day .period.h2 {
     font-size: .65rem;
     font-family: monospace;
     /* opacity: .6; */
+    color: var(--gray5)
 }
 
 .block-name {

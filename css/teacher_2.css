@@ -2,7 +2,7 @@
     content: '';
     width: 1.5rem;
     height: 1.5rem;
-    border: 1px solid var(--gray5);
+    border: 1px solid var(--gray3);
     display: block;
     position: absolute;
     border-radius: 50%;
