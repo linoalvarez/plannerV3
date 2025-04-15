@@ -257,7 +257,7 @@ document.getElementById('teacher').addEventListener('change', function () {
         if (!existingLink) {
             const link = document.createElement('link');
             link.rel = 'stylesheet';
-            link.href = 'css/teacher_2.css'; // Path to your stylesheet
+            link.href = 'css/teacher.css'; // Path to your stylesheet
             link.id = stylesheetId;
             document.head.appendChild(link);
         }
