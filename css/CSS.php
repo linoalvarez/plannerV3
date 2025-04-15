@@ -576,4 +576,21 @@ img:nth-of-type(2) {right: 1rem;}
         display: none;
     }
 }
+
+div.school-day::after {
+    content: '';
+    border: 1px solid var(--gray1);
+    position: absolute;
+    width: 3.7rem;
+    right: 0rem;
+    transform: rotate(-45deg) translate(18px, -4px);
+}
+
+div.school-day:nth-of-type(1)::after, 
+div.school-day:nth-of-type(2)::after,
+div.school-day:nth-of-type(4)::after, 
+div.school-day:nth-of-type(3)::after {
+    border-color: transparent;
+}
+
 </style>
