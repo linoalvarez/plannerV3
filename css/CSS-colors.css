@@ -1,4 +1,3 @@
-<style>
     :root {
         --gray0: #0000;
         --gray1: #0001;
@@ -43,5 +42,3 @@
 .gray15 {background-color: var(--gray15); color: #fff}
 
 
-
-</style>

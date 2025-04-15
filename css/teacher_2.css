@@ -11,10 +11,9 @@
 
 .amsa-day,
 .weekday {
-    color: var(--gray8)
+    color: var(--gray8);
+    color: red !important;
 }
-
-
 
 .grid-schedule .teacher,
 .grid-schedule .room,
@@ -29,8 +28,6 @@
     display: none !important;
 }
 
-
 .class-name {
     font-size: 2.2rem;
 }
-

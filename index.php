@@ -6,8 +6,13 @@
 
 <title>AMSA Planner</title>
 
-<?php include('css/CSS.php'); ?>
-<?php include('css/CSS-colors.php'); ?>
+<link rel="stylesheet" href="css/CSS.css">
+<link rel="stylesheet" href="css/CSS-colors.css">
+
+<?php //include('css/CSS.php'); ?>
+<?php //include('css/CSS-colors.php'); ?>
+
+
 <?php include('data/data-holidays-specialdays.php'); ?>
  
 <div class="no-print reference"></div>
