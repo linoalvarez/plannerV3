@@ -77,6 +77,7 @@ header {
     box-shadow: 0 0 5px 1px #333;
     opacity: .8;
     z-index: 99;
+    border-radius: 3px;
 }
 
 .school-day {
@@ -114,6 +115,9 @@ header {
     padding: 1rem 1rem 0rem ;
 }
 
+.student-info h1{
+    margin-top: 1rem;
+}
 .student-info h1,
 .student-info h2{
     /* opacity: .8; */
@@ -142,10 +146,10 @@ header {
     gap: 0px 10px;
     justify-content: space-between;
     padding: 1rem 0 1.2rem 0;
-    background-color: #ddd9;
+    /* background-color: #ddd9; */
     text-align: center;
     font-size: .75rem;
-}
+    background: linear-gradient(#ddd0, #ddd9);}
 
 header .date {
     font-size: 3rem;
@@ -282,8 +286,8 @@ footer {
     color: var(--gray2);
     width: max-content;
     position: absolute;
-    top: 50rem;
-    left: 31rem;
+    top: 5.7rem;
+    left: 19.4rem;
     /* transform: rotate(-90deg) */
 }
 
@@ -359,7 +363,6 @@ footer  {
     /* font-weight: 900; */
     font-size: .8rem;
     text-align: left;
-
 }
 
 .grid-schedule td,
@@ -413,7 +416,7 @@ table td:first-of-type {
     display: inline-block;
     width: 0.5in;
     height: 0.5px;
-    background-color: #555;
+    background-color: #5559;
 }
 
 
